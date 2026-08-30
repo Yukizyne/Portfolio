@@ -63,3 +63,29 @@ navLinksContainer.querySelectorAll("a").forEach(link => {
         menuToggle.textContent = "☰";
     });
 });
+
+const skillsSection = document.querySelector("#skills");
+const skillProgressBars = document.querySelectorAll(".skill-progress");
+
+const skillsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            skillProgressBars.forEach(bar => {
+                const progress = bar.dataset.progress;
+                bar.style.width = progress + "%";
+            });
+
+            skillsObserver.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.3
+});
+
+skillsObserver.observe(skillsSection);
+const viewGamesBtn = document.querySelector(".view-games-btn");
+const gameOptions = document.querySelector(".game-options");
+
+viewGamesBtn.addEventListener("click", () => {
+    gameOptions.classList.toggle("show");
+});

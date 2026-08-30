@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cholo | Portfolio</title>
+    <title>Portfolio</title>
     <meta name="description" content="Cholo is a Web and Game Developer creating modern websites, applications, and Roblox games.">
     <meta name="keywords" content="Cholo, Web Developer, Game Developer, Roblox Developer, PHP, MySQL, JavaScript, Java, Lua">
     <meta name="author" content="Cholo">
@@ -14,7 +14,15 @@
 <body>
     <header>
         <nav class="navbar">
-            <a href="#home" class="logo">Cholo<span>.</span></a>
+            <a href="#home" class="logo">
+                <span class="logo-dev">
+                    <span>D</span><span>e</span><span>v</span>
+                </span>
+
+                <span class="logo-cholo">
+                    <span>C</span><span>h</span><span>o</span><span>l</span><span>o</span><span class="logo-dot">.</span>
+                </span>
+            </a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -33,7 +41,14 @@
         <section id="home" class="hero">
             <div class="hero-content">
                 <p class="eyebrow">HELLO, I'M</p>
-                <h1>DevCholo<span>.</span></h1>
+                <h1 class="animated-name">
+                    <span>C</span>
+                    <span>h</span>
+                    <span>o</span>
+                    <span>l</span>
+                    <span>o</span>
+                    <span>.</span>
+                </h1>
                 <h2>WEB & GAME DEVELOPER</h2>
                 <p class="hero-description">I'm a developer who likes building websites, experimenting with Roblox games, and turning random ideas into working projects.</p>
                 <div class="availability">
@@ -98,37 +113,74 @@
                     <div class="skill-card">
                         <div class="skill-icon">HTML</div>
                         <h3>HTML</h3>
-                        <p>Semantic and structured web pages.</p>
+                        <p>Basic HTML structured web pages.</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="75"></div>
+                        </div>
                     </div>
                     <div class="skill-card">
                         <div class="skill-icon">CSS</div>
                         <h3>CSS</h3>
-                        <p>Responsive layouts and modern interfaces.</p>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">PHP</div>
-                        <h3>PHP</h3>
-                        <p>Backend development and web systems.</p>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">SQL</div>
-                        <h3>MySQL</h3>
-                        <p>Database design and data management.</p>
+                        <p>Slightly familiar with CSS styling and layout techniques.</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="65"></div>
+                        </div>
                     </div>
                     <div class="skill-card">
                         <div class="skill-icon">JS</div>
                         <h3>JavaScript</h3>
-                        <p>Interactive web applications and dynamic user experiences.</p>
+                        <p>Currently learning to create interactive web applications and dynamic user experiences.</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="45"></div>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon">SQL</div>
+                        <h3>MySQL</h3>
+                        <p>Currently learning database design and data management.</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="55"></div>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon">Php</div>
+                        <h3>PHP</h3>
+                        <p>Currently learning backend development with PHP.</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="40"></div>
+                        </div>
                     </div>
                     <div class="skill-card">
                         <div class="skill-icon">React</div>
                         <h3>React</h3>
-                        <p>Frontend development with modern JavaScript.</p>
+                        <p>Currently learning and applying the JavaScript library for building user interfaces.</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="40"></div>
+                        </div>
                     </div>
                     <div class="skill-card">
                         <div class="skill-icon">M-DB</div>
                         <h3>MongoDB</h3>
-                        <p>NoSQL database design and data management.</p>
+                        <p>Currently learning NoSQL database design and data management.</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="40"></div>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon">T-C</div>
+                        <h3>Tailwind CSS</h3>
+                        <p>Currently learning and applying the utility-first CSS framework.</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="40"></div>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon">Lua</div>
+                        <h3>Lua</h3>
+                        <p>Currently learning the Lua programming language.</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="25"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -137,9 +189,9 @@
         <section id="projects" class="reveal">
             <div class="section-container">
                 <p class="section-label">Projects</p>
-                <h2 class="section-title">My Projects.</h2>
+                <h2 class="section-title">My Current Projects.</h2>
                 <div class="projects">
-                    <article class="project-card">
+                    <!--<article class="project-card">
                             <div class="project-image">
                                 <img src="images/schoolmanagement.png" alt="School Management System" loading="lazy">
                             </div>
@@ -148,8 +200,7 @@
                                     <span class="project-number">01</span>
                                     <h3>School Management System</h3>
                                 </div>
-                                <p>
-                                    A school management system I built to practice web development,
+                                <p>A school management system I built to practice web development,
                                     database management, and creating systems for managing school data.
                                 </p>
                                 <div class="project-tags">
@@ -165,7 +216,7 @@
                                     </a>
                                 </div>
                             </div>
-                        </article>
+                        </article>-->
                     <article class="project-card">
                         <div class="project-image">
                             <img src="images/roblox.png" alt="Roblox Game">
@@ -173,7 +224,7 @@
                         <div class="project-info">
                             <div class="project-top">
                                 <span class="project-number">R</span>
-                                <h3>Roblox Game</h3>
+                                <h3>Roblox</h3>
                             </div>
                             <p>A Roblox project I built while learning game development
                                 with Roblox Studio and Lua. I experimented with gameplay
@@ -186,13 +237,19 @@
                                 <span>Beginner</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://www.roblox.com/games/132128722810381/Drill-land-for-luckyblock" class="project-btn">View Game ↗</a>
-                                <a href="https://www.roblox.com/games/70694959128368/Pull-a-LuckyBlock-for-Brainrot" class="project-btn">View Game ↗</a>
+                                <button class="project-btn view-games-btn">View Games ↗</button>
+                                <div class="game-options">
+                                    <a href="https://www.roblox.com/games/132128722810381/Drill-land-for-luckyblock" target="_blank">
+                                        Drill Land for Luckyblock ↗
+                                    </a>
+                                    <a href="https://www.roblox.com/games/70694959128368/Pull-a-LuckyBlock-for-Brainrot" target="_blank">
+                                        Pull a LuckyBlock for Brainrot ↗
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </article>
-
-                    <article class="project-card">
+                    <!--<article class="project-card">
                         <div class="project-image">
                             <img src="images/java.png" alt="Java Project">
                         </div>
@@ -212,7 +269,7 @@
                                 <a href="#" class="project-btn">Not Deployed...</a>
                             </div>
                         </div>
-                    </article>
+                    </article>-->
                 </div>
             </div>
         </section>
