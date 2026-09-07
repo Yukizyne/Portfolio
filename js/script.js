@@ -1,264 +1,175 @@
-/* =========================================================
-   DEVCHOLO — MAIN SCRIPT
-   H1 / NAME ANIMATION REMOVED
-========================================================= */
-
-
-/* =========================================================
-   THEME TOGGLE
-========================================================= */
-
 const themeToggle = document.getElementById("themeToggle");
 
 if (themeToggle) {
-    themeToggle.addEventListener("click", () => {
+const savedTheme = localStorage.getItem("theme");
 
-        document.body.classList.toggle("light");
 
-        themeToggle.textContent =
-            document.body.classList.contains("light")
-                ? "☀"
-                : "☼";
-
-    });
+if (savedTheme === "light") {
+    document.body.classList.add("light");
+    themeToggle.textContent = "☀";
 }
 
+themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("light");
 
-/* =========================================================
-   SCROLL REVEAL
-========================================================= */
+    const isLight = document.body.classList.contains("light");
+
+    themeToggle.textContent = isLight ? "☀" : "☼";
+    localStorage.setItem("theme", isLight ? "light" : "dark");
+});
+
+
+}
 
 const revealElements = document.querySelectorAll(".reveal");
 
 function revealOnScroll() {
+revealElements.forEach(element => {
+const elementTop = element.getBoundingClientRect().top;
 
-    revealElements.forEach(element => {
 
-        const elementTop =
-            element.getBoundingClientRect().top;
+    if (elementTop < window.innerHeight - 100) {
+        element.classList.add("show");
+    }
+});
 
-        const windowHeight =
-            window.innerHeight;
-
-        if (elementTop < windowHeight - 100) {
-            element.classList.add("show");
-        }
-
-    });
 
 }
 
 window.addEventListener("scroll", revealOnScroll);
-
 revealOnScroll();
 
-
-/* =========================================================
-   ACTIVE NAVIGATION
-========================================================= */
-
-const sections =
-    document.querySelectorAll("section");
-
-const navLinks =
-    document.querySelectorAll(".nav-links a");
+const sections = document.querySelectorAll("section[id]");
+const navLinks = document.querySelectorAll(".nav-links a");
 
 function updateActiveNavigation() {
+let current = "";
 
-    let current = "";
 
-    sections.forEach(section => {
+sections.forEach(section => {
+    const sectionTop = section.offsetTop - 180;
 
-        const sectionTop =
-            section.offsetTop - 150;
+    if (window.scrollY >= sectionTop) {
+        current = section.getAttribute("id");
+    }
+});
 
-        if (window.scrollY >= sectionTop) {
-            current =
-                section.getAttribute("id");
-        }
+navLinks.forEach(link => {
+    link.classList.remove("active");
 
-    });
+    if (link.getAttribute("href") === `#${current}`) {
+        link.classList.add("active");
+    }
+});
 
-    navLinks.forEach(link => {
-
-        link.classList.remove("active");
-
-        if (
-            link.getAttribute("href") ===
-            `#${current}`
-        ) {
-            link.classList.add("active");
-        }
-
-    });
 
 }
 
-window.addEventListener(
-    "scroll",
-    updateActiveNavigation
-);
-
+window.addEventListener("scroll", updateActiveNavigation);
 updateActiveNavigation();
 
-
-/* =========================================================
-   MOBILE MENU
-========================================================= */
-
-const menuToggle =
-    document.getElementById("menuToggle");
-
-const navLinksContainer =
-    document.querySelector(".nav-links");
+const menuToggle = document.getElementById("menuToggle");
+const navLinksContainer = document.querySelector(".nav-links");
 
 if (menuToggle && navLinksContainer) {
+menuToggle.addEventListener("click", () => {
+navLinksContainer.classList.toggle("open");
 
-    menuToggle.addEventListener("click", () => {
 
-        navLinksContainer.classList.toggle("active");
+    menuToggle.textContent =
+        navLinksContainer.classList.contains("open")
+            ? "✕"
+            : "☰";
+});
 
-        menuToggle.textContent =
-            navLinksContainer.classList.contains("active")
-                ? "✕"
-                : "☰";
-
+navLinksContainer.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+        navLinksContainer.classList.remove("open");
+        menuToggle.textContent = "☰";
     });
+});
 
-
-    navLinksContainer
-        .querySelectorAll("a")
-        .forEach(link => {
-
-            link.addEventListener("click", () => {
-
-                navLinksContainer.classList.remove(
-                    "active"
-                );
-
-                menuToggle.textContent = "☰";
-
-            });
-
-        });
+document.addEventListener("click", event => {
+    if (
+        !navLinksContainer.contains(event.target) &&
+        !menuToggle.contains(event.target)
+    ) {
+        navLinksContainer.classList.remove("open");
+        menuToggle.textContent = "☰";
+    }
+});
 
 }
 
-
-/* =========================================================
-   SKILL BARS
-========================================================= */
-
-const skillsSection =
-    document.querySelector("#skills");
-
-const skillProgressBars =
-    document.querySelectorAll(".skill-progress");
+const skillsSection = document.querySelector("#skills");
+const skillProgressBars = document.querySelectorAll(".skill-progress");
 
 if (skillsSection && skillProgressBars.length) {
-
-    const skillsObserver =
-        new IntersectionObserver(
-            (entries) => {
-
-                entries.forEach(entry => {
-
-                    if (!entry.isIntersecting) {
-                        return;
-                    }
-
-                    skillProgressBars.forEach(bar => {
-
-                        const progress =
-                            bar.dataset.progress;
-
-                        if (progress) {
-
-                            bar.style.width =
-                                `${progress}%`;
-
-                        }
-
-                    });
-
-                    skillsObserver.unobserve(
-                        entry.target
-                    );
-
-                });
-
-            },
-            {
-                threshold: 0.3
-            }
-        );
-
-    skillsObserver.observe(skillsSection);
-
+const skillsObserver = new IntersectionObserver(
+entries => {
+entries.forEach(entry => {
+if (!entry.isIntersecting) {
+return;
 }
 
 
-/* =========================================================
-   ROBLOX GAME DROPDOWN
-========================================================= */
+            skillProgressBars.forEach(bar => {
+                const progress = bar.dataset.progress;
 
-const viewGamesBtn =
-    document.querySelector(".view-games-btn");
+                if (progress) {
+                    bar.style.width = `${progress}%`;
+                }
+            });
 
-const gameOptions =
-    document.querySelector(".game-options");
+            skillsObserver.unobserve(entry.target);
+        });
+    },
+    {
+        threshold: 0.3
+    }
+);
+
+skillsObserver.observe(skillsSection);
+
+
+}
+
+const viewGamesBtn = document.querySelector(".view-games-btn");
+const gameOptions = document.querySelector(".game-options");
 
 if (viewGamesBtn && gameOptions) {
+viewGamesBtn.addEventListener("click", event => {
+event.stopPropagation();
+gameOptions.classList.toggle("show");
+});
 
-    viewGamesBtn.addEventListener("click", () => {
 
-        gameOptions.classList.toggle("show");
+document.addEventListener("click", event => {
+    if (
+        !gameOptions.contains(event.target) &&
+        !viewGamesBtn.contains(event.target)
+    ) {
+        gameOptions.classList.remove("show");
+    }
+});
 
-    });
 
 }
 
-
-/* =========================================================
-   STATIC H1
-   NO MOVEMENT
-   NO PARTICLES
-   NO DESTRUCTION
-   NO REBUILD
-   NO AUTO ANIMATION
-========================================================= */
-
-const nameElement =
-    document.querySelector(".animated-name");
+const nameElement = document.querySelector(".animated-name");
 
 if (nameElement) {
-
-    /* Remove any animation added by JavaScript */
-    nameElement.style.animation = "none";
-
-    /* Remove movement */
-    nameElement.style.transform = "none";
-
-    /* Remove transition */
-    nameElement.style.transition = "none";
-
-    /* Keep it visible */
-    nameElement.style.opacity = "1";
-    nameElement.style.visibility = "visible";
+nameElement.style.animation = "none";
+nameElement.style.transform = "none";
+nameElement.style.transition = "none";
+nameElement.style.opacity = "1";
+nameElement.style.visibility = "visible";
 
 
-    /* Remove any old particle elements */
-    nameElement
-        .querySelectorAll(".name-particle")
-        .forEach(particle => {
-            particle.remove();
-        });
+nameElement.querySelectorAll(".name-particle").forEach(particle => {
+    particle.remove();
+});
 
-
-    /* Remove old animation classes */
-    nameElement.classList.remove(
-        "destroying",
-        "rebuilding"
-    );
+nameElement.classList.remove("destroying", "rebuilding");
 
 }
